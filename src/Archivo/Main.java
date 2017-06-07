@@ -24,6 +24,15 @@ public class Main {
         estudiantes.add(e1);
         OperacionArchivo.crear(estudiantes);
         
+        ArrayList<Estudiante> est=new ArrayList<Estudiante>();
+        Estudiante estudiante=new Estudiante();
+        estudiante.setRut("22222-2");
+        estudiante.setNombre("Luis");
+        estudiante.setApellidos("Hernandez");
+        est.add(estudiante);
+        OperacionArchivo.agregar(est);
+        
+        
         ArrayList<Estudiante> lista=new ArrayList<>();
         lista=OperacionArchivo.leerArchivo();
         for (Estudiante e : lista) {

@@ -30,7 +30,7 @@ public class OperacionArchivo {
             for (Estudiante e : lista) {
                 bw.write(e.getRut()+","+
                         e.getNombre()+","+
-                        e.getApellidos());
+                        e.getApellidos()+"\n");
             }
             bw.close();
             System.out.println("Archivo Creado!");
@@ -68,6 +68,31 @@ public class OperacionArchivo {
             System.out.println("Existe un error al leer el archivo "+ex.toString());
         }
         return estudiantes;
+    }
+    
+    public static void agregar(ArrayList<Estudiante> lista){
+        FileWriter fw=null;
+        try {
+            fw=new FileWriter("C:\\Users\\David\\Desktop\\estudiantes.txt",true);
+            BufferedWriter bw=new BufferedWriter(fw);
+            for (Estudiante e : lista) {
+                bw.write(e.getRut()+","+
+                        e.getNombre()+","+
+                        e.getApellidos()+"\n");
+            }
+            bw.close();
+            System.out.println("Fue agregado el estudiante");
+        } catch (IOException ex) {
+            System.out.println("Error al agregar"+ex.toString());
+        }finally{
+            if(fw!=null){
+                try {
+                    fw.close();
+                } catch (IOException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
+        }
     }
     
 }
