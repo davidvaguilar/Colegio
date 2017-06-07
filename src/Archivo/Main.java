@@ -18,11 +18,18 @@ public class Main {
         ArrayList<Estudiante> estudiantes=new ArrayList<Estudiante>();
         Estudiante e1=new Estudiante();
         e1.setRut("1111-1");
-        e1.setNombre("Pepito");
-        e1.setApellidos("fghj");
+        e1.setNombre("Juanito");
+        e1.setApellidos("Fernandez");
         e1.setDireccion("Heroes de la C.");
         estudiantes.add(e1);
         OperacionArchivo.crear(estudiantes);
+        
+        ArrayList<Estudiante> lista=new ArrayList<>();
+        lista=OperacionArchivo.leerArchivo();
+        for (Estudiante e : lista) {
+            System.out.println(e.getRut()+" "+
+                    e.getNombre()+" "+e.getApellidos());
+        }
         
     }
     

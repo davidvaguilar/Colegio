@@ -6,9 +6,12 @@
 package Archivo;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Estudiante;
@@ -25,8 +28,8 @@ public class OperacionArchivo {
             fw=new FileWriter("C:\\Users\\David\\Desktop\\estudiantes.txt");
             BufferedWriter bw =new BufferedWriter(fw);
             for (Estudiante e : lista) {
-                bw.write(e.getRut()+"-"+
-                        e.getNombre()+"-"+
+                bw.write(e.getRut()+","+
+                        e.getNombre()+","+
                         e.getApellidos());
             }
             bw.close();
@@ -43,4 +46,28 @@ public class OperacionArchivo {
             }
         }
     }
+    
+    public static ArrayList leerArchivo(){
+        File f=new File("C:\\Users\\David\\Desktop\\estudiantes.txt");
+        ArrayList<Estudiante> estudiantes=new ArrayList<>();
+        Scanner scanner;
+        try {
+            scanner=new Scanner(f);
+            while(scanner.hasNextLine()){
+                String linea=scanner.nextLine();
+                Scanner delimitador=new Scanner(linea);
+                delimitador.useDelimiter("\\s*,\\s*");
+                Estudiante e=new Estudiante();
+                e.setRut(delimitador.next());
+                e.setNombre(delimitador.next());
+                e.setApellidos(delimitador.next());
+                estudiantes.add(e);
+            }
+            scanner.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Existe un error al leer el archivo "+ex.toString());
+        }
+        return estudiantes;
+    }
+    
 }
