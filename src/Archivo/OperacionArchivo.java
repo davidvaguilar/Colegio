@@ -21,11 +21,12 @@ import modelo.Estudiante;
  * @author David
  */
 public class OperacionArchivo {
+    static String ruta= "C:\\Users\\David\\Documents\\NetBeansProjects\\Escuela\\src\\Fichero\\estudiantes.mp3";
     
     public static void crear(ArrayList<Estudiante> lista) {
         FileWriter fw=null;
         try {
-            fw=new FileWriter("C:\\Users\\David\\Desktop\\estudiantes.txt");
+            fw=new FileWriter(ruta);
             BufferedWriter bw =new BufferedWriter(fw);
             for (Estudiante e : lista) {
                 bw.write(e.getRut()+","+
@@ -48,7 +49,7 @@ public class OperacionArchivo {
     }
     
     public static ArrayList leerArchivo(){
-        File f=new File("C:\\Users\\David\\Desktop\\estudiantes.txt");
+        File f=new File(ruta);
         ArrayList<Estudiante> estudiantes=new ArrayList<>();
         Scanner scanner;
         try {
@@ -70,10 +71,34 @@ public class OperacionArchivo {
         return estudiantes;
     }
     
+    public static Estudiante buscar(String rut){
+        File f=new File(ruta);
+        Scanner scanner;
+        try {
+            scanner=new Scanner(f);
+            while(scanner.hasNextLine()){
+                String linea=scanner.nextLine();
+                Scanner delimitador=new Scanner(linea);
+                delimitador.useDelimiter("\\s*,\\s*");
+                Estudiante e=new Estudiante();
+                e.setRut(delimitador.next());
+                e.setNombre(delimitador.next());
+                e.setApellidos(delimitador.next());
+                if(rut.equals(e.getRut())){
+                    return e;
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Existe un error al leer el archivo "+ex.toString());
+        }
+        return null;
+    }
+    
     public static void agregar(ArrayList<Estudiante> lista){
         FileWriter fw=null;
         try {
-            fw=new FileWriter("C:\\Users\\David\\Desktop\\estudiantes.txt",true);
+            fw=new FileWriter(ruta,true);
             BufferedWriter bw=new BufferedWriter(fw);
             for (Estudiante e : lista) {
                 bw.write(e.getRut()+","+

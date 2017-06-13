@@ -36,8 +36,14 @@ public class Main {
         ArrayList<Estudiante> lista=new ArrayList<>();
         lista=OperacionArchivo.leerArchivo();
         for (Estudiante e : lista) {
-            System.out.println(e.getRut()+" "+
-                    e.getNombre()+" "+e.getApellidos());
+            System.out.println(e.toString());
+        }
+        
+        Estudiante bus=OperacionArchivo.buscar("22222-2");
+        if(bus!=null){
+            System.out.println("Estudiante existe en el Archivo, y su nombre es: "+bus.getNombre());
+        }else{
+            System.out.println("Estudiante no existe");
         }
         
     }

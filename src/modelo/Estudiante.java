@@ -58,6 +58,13 @@ public class Estudiante {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" + "rut=" + rut + ", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono + ", direccion=" + direccion + '}';
+    }
+
+    
     
     
 }
