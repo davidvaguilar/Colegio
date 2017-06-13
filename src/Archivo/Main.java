@@ -35,18 +35,31 @@ public class Main {
         
         ArrayList<Estudiante> lista=new ArrayList<>();
         lista=OperacionArchivo.leerArchivo();
+        int i=0;
         for (Estudiante e : lista) {
-            System.out.println(e.toString());
+            if(e.getRut().equals("1111-1")){
+                lista.remove(i);
+                System.out.println("Elemento Removido");
+            }
+            else{
+                System.out.println(e.toString());
+            }
+            i=i+1;
         }
-        
-        Estudiante bus=OperacionArchivo.buscar("22222-2");
-        if(bus!=null){
-            System.out.println("Estudiante existe en el Archivo, y su nombre es: "+bus.getNombre());
-        }else{
-            System.out.println("Estudiante no existe");
-        }
-        
+        OperacionArchivo.crear(lista);
+//        for (Estudiante estudiante1 : lista) {
+//            System.out.println(estudiante1.toString());
+//        }
+//        
+//        
+//        Estudiante bus=OperacionArchivo.buscar("22222-2");
+//        if(bus!=null){
+//            System.out.println("Estudiante existe en el Archivo, y su nombre es: "+bus.getNombre());
+//        }else{
+//            System.out.println("Estudiante no existe");
+//        }
+//        
     }
-    
-    
+//    
+//    
 }
